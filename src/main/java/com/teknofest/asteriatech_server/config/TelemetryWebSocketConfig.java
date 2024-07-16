@@ -7,7 +7,7 @@ import org.springframework.web.socket.server.support.HttpSessionHandshakeInterce
 
 @Configuration
 @EnableWebSocket
-public class WebSocketConfig implements WebSocketConfigurer {
+public class TelemetryWebSocketConfig implements WebSocketConfigurer {
 
     @Override
     public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
@@ -17,7 +17,7 @@ public class WebSocketConfig implements WebSocketConfigurer {
     }
 
     @Bean
-    public com.teknofest.asteriatech_server.handler.TelemetryWebSocketHandler telemetryWebSocketHandler() {
-        return new com.teknofest.asteriatech_server.handler.TelemetryWebSocketHandler();
+    public TelemetryWebSocketHandler telemetryWebSocketHandler() {
+        return new TelemetryWebSocketHandler();
     }
 }

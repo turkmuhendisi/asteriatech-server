@@ -1,22 +1,21 @@
 package com.teknofest.asteriatech_server.config;
 
+import org.springframework.stereotype.Component;
 import org.springframework.web.socket.*;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
-import org.springframework.stereotype.Component;
-
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
 @Component
-public class TelemetryWebSocketHandler extends TextWebSocketHandler {
+public class ThermalCameraWebSocketHandler extends TextWebSocketHandler {
 
     private final Set<WebSocketSession> sessions = Collections.synchronizedSet(new HashSet<>());
 
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
         sessions.add(session);
-        session.sendMessage(new PingMessage());
+        session.sendMessage(new TextMessage("Connection established"));
     }
 
     @Override
@@ -30,9 +29,13 @@ public class TelemetryWebSocketHandler extends TextWebSocketHandler {
         System.out.println("Received message: " + payload);
     }
 
-    @Override
-    public void handlePongMessage(WebSocketSession session, PongMessage message) throws Exception {
-        System.out.println("Received pong message");
+    public void sendThermalDataToClients(String json) throws Exception {
+        synchronized (sessions) {
+            for (WebSocketSession session : sessions) {
+                if (session.isOpen()) {
+                    session.sendMessage(new TextMessage(json));  // JSON string formatında gönder
+                }
+            }
+        }
     }
-
 }
