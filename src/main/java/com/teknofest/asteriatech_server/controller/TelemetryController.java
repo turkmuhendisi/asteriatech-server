@@ -1,5 +1,6 @@
 package com.teknofest.asteriatech_server.controller;
 
+import com.teknofest.asteriatech_server.service.MessageValidationService;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
