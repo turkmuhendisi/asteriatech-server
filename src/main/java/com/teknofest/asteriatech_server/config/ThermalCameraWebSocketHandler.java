@@ -26,7 +26,8 @@ public class ThermalCameraWebSocketHandler extends TextWebSocketHandler {
     @Override
     public void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
         String payload = message.getPayload();
-        System.out.println("Received message: " + payload);
+        sendThermalDataToClients(payload);
+        System.out.println(payload);
     }
 
     public void sendThermalDataToClients(String json) throws Exception {

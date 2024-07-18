@@ -8,8 +8,8 @@ import java.util.Arrays;
 @Service
 public class MessageValidationService {
 
-    public static boolean isEnumValue(String message){
-        return Arrays.stream(CentralVisionAction.values())
+    public static <E extends Enum<E>> boolean isValidAction(Class<E> enumClass, String message){
+        return Arrays.stream(enumClass.getEnumConstants())
                 .anyMatch(x -> x.name().equalsIgnoreCase(message));
     }
 }

@@ -1,6 +1,5 @@
 package com.teknofest.asteriatech_server.config;
 
-import com.teknofest.asteriatech_server.service.MessageValidationService;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
@@ -33,7 +32,7 @@ public class DroneWebSocketHandler extends TextWebSocketHandler {
     public void sendDroneAction(String action) throws Exception {
         synchronized (sessions) {
             for (WebSocketSession session : sessions) {
-                if (session.isOpen() && MessageValidationService.isEnumValue(action)) {
+                if (session.isOpen()) {
                     session.sendMessage(new TextMessage(action));  // JSON string formatında gönder
                 }
             }
