@@ -1,4 +1,4 @@
-package com.teknofest.asteriatech_server.config;
+package com.teknofest.asteriatech_server.websocket.handler;
 
 import com.teknofest.asteriatech_server.enums.CentralVisionAction;
 import com.teknofest.asteriatech_server.service.CentralVisionIncomingJsonSplitService;
@@ -21,7 +21,6 @@ public class CentralVisionControlWebSocketHandler extends TextWebSocketHandler {
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
         sessions.add(session);
-        session.sendMessage(new TextMessage("Connection Established"));
     }
 
     @Override
@@ -59,10 +58,10 @@ public class CentralVisionControlWebSocketHandler extends TextWebSocketHandler {
      * @param session
      * @throws Exception just for test
      */
-    public void sendMessageToClientFromServer(WebSocketSession session, String message) throws Exception {
+    /*public void sendMessageToClientFromServer(WebSocketSession session, String message) throws Exception {
         if (session.isOpen()) {
             session.sendMessage(new TextMessage(message));
         }
-    }
+    }*/
 
 }
